@@ -13,6 +13,8 @@ use App\Models\Stock;
 use App\Models\PrimaryCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 class ItemController extends Controller
 {
@@ -38,6 +40,10 @@ class ItemController extends Controller
         $shop = Shop::first();
 
         //dd($shop);
+        Mail::to('test@example.com')
+            ->send(new TestMail());
+
+
         if ($shop->is_selling === 1) {
             $categories = primaryCategory::with('secondary')
                 ->get();
