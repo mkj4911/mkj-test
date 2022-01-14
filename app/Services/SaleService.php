@@ -12,19 +12,19 @@ use DateTime;
 
 class SaleService
 {
-    public static function getItemsSale($items)
+    public static function getItemsSale($sales)
     {
-        $products = [];
+        $productsSale = [];
 
 
-        foreach ($items as $item) {
-            $member = Product::where('id', $item->product_id)
+        foreach ($sales as $sale) {
+            $member = Product::where('id', $sale->product_id)
                 ->select('member_id')->get()->toArray();
 
-            $product = Product::where('id', $item->product_id)
+            $product = Product::where('id', $sale->product_id)
                 ->select('price')->get()->toArray();
 
-            $quantity = Cart::where('product_id', $item->product_id)
+            $quantity = Cart::where('product_id', $sale->product_id)
                 ->select('product_id', 'user_id', 'quantity')->get()->toArray();
 
             $processing = array('processing' => 1);
@@ -33,11 +33,11 @@ class SaleService
 
             $result = array_merge($member[0], $product[0], $quantity[0], $processing, $created_at);
 
-            array_push($products, $result);
+            array_push($productsSale, $result);
         }
         //dd($products);
-        DB::table('sales')->insert($products);
+        DB::table('sales')->insert($productsSale);
 
-        return  $products;
+        return  $productsSale;
     }
 }
