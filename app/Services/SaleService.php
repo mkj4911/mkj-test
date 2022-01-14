@@ -14,7 +14,7 @@ class SaleService
 {
     public static function getItemsSale($sales)
     {
-        $products = [];
+        $productsSale = [];
 
 
         foreach ($sales as $sale) {
@@ -33,11 +33,11 @@ class SaleService
 
             $result = array_merge($member[0], $product[0], $quantity[0], $processing, $created_at);
 
-            array_push($products, $result);
+            array_push($productsSale, $result);
         }
         //dd($products);
-        DB::table('sales')->insert($products);
+        DB::table('sales')->insert($productsSale);
 
-        return  $products;
+        return  $productsSale;
     }
 }
