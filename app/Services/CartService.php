@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Member;
 
 
 class CartService
@@ -14,7 +15,11 @@ class CartService
 
         foreach ($items as $item) {
             $p = Product::findOrFail($item->product_id);
-            $member = $p->member->select('name', 'email')->first()->toArray();
+            $m = Product::where('id', $item->product_id)
+                ->select('member_id')->get();
+            $members = Member::findOrFail($m)->first();
+            $member = Member::where('id', $members->id)
+                ->select('name', 'email')->get()->first()->toArray();
             $values = array_values($member);
             $keys = ['memberName', 'email'];
             $memberInfo = array_combine($keys, $values);
@@ -25,6 +30,7 @@ class CartService
             $result = array_merge($product[0], $memberInfo, $quantity[0]);
             array_push($products, $result);
         }
+        //dd($products);
 
         return $products;
     }

@@ -41,7 +41,7 @@ class ItemController extends Controller
         $shop = Shop::first();
 
         //非同期メール送信
-        SendThanksMail::dispatch();
+        // SendThanksMail::dispatch();
 
 
         if ($shop->is_selling === 1) {

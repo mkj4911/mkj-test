@@ -1938,6 +1938,10 @@ select {
     width: 33.333333%;
   }
 
+  .md\:w-80 {
+    width: 20rem;
+  }
+
   .md\:w-32 {
     width: 8rem;
   }
@@ -1956,10 +1960,6 @@ select {
 
   .md\:w-2\/5 {
     width: 40%;
-  }
-
-  .md\:w-80 {
-    width: 20rem;
   }
 
   .md\:table-fixed {
