@@ -38,7 +38,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // return redirect()->intended(RouteServiceProvider::MEMBER_HOME);
-        return redirect('/member/time/index');
+        return redirect('/member/time/index')->with([
+            'message' => '現在の日時を確認してください。',
+            'status' => 'alert'
+        ]);;
     }
 
     /**
