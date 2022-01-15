@@ -4,21 +4,26 @@
 ＥＣサイトの運営会社を想定しており、Admin(管理者)・Member(スタッフ)・User(お客様)と
 ３つのログイン情報で管理しています。
 
--Admin
- -スタッフ情報の登録・編集・削除
- -カテゴリーの登録・編集・削除
- -店舗情報の編集(情報編集・休日設定(簡易版))
- -販売情報の閲覧
- -商品情報の閲覧
--Member
- -勤怠管理(簡易版)
- -商品画像の登録・編集・削除
- -商品の登録・編集・削除
- -販売管理(自分の担当する商品が購入された後の処理(簡易版))
--User
- -商品の購入
- -店舗情報の閲覧
- -購入履歴の閲覧
+- Admin
+
+ - スタッフ情報の登録・編集・削除
+ - カテゴリーの登録・編集・削除
+ - 店舗情報の編集(情報編集・休日設定(簡易版))
+ - 販売情報の閲覧
+ - 商品情報の閲覧
+
+- Member
+
+ - 勤怠管理(簡易版)
+ - 商品画像の登録・編集・削除
+ - 商品の登録・編集・削除
+ - 販売管理(自分の担当する商品が購入された後の処理(簡易版))
+
+- User
+
+ - 商品の購入
+ - 店舗情報の閲覧
+ - 購入履歴の閲覧
 
 ## ダウンロード方法
 git clone
@@ -28,20 +33,20 @@ git clone https://github.com/mkj4911/mkj-test.git
 もしくはzipファイルでダウンロードしてください
 
 インストール方法
--cd mkj-test
--composer install
--npm install
--npm run dev
+- cd mkj-test
+- composer install
+- npm install
+- npm run dev
 .env.example をコピーして .env ファイルを作成
 
 .envファイルの中の下記をご利用の環境に合わせて変更してください。
 
--DB_CONNECTION=mysql
--DB_HOST=127.0.0.1
--DB_PORT=9090
--DB_DATABASE=mkj-test
--DB_USERNAME=mkj
--DB_PASSWORD=password123
+- DB_CONNECTION=mysql
+- DB_HOST=127.0.0.1
+- DB_PORT=9090
+- DB_DATABASE=mkj-test
+- DB_USERNAME=mkj
+- DB_PASSWORD=password123
 
 XAMPP/MAMPまたは他の開発環境でDBを起動した後に
 
