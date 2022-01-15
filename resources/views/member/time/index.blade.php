@@ -10,16 +10,16 @@
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div class="p-6 bg-white border-b border-gray-200">
-                <div class="md:flex items-end h-20 mb-12 md:mb-4"><p class="text-lg mr-4">{{$day}}</p><output id="realtime" class="text-3xl w-20"></output><x-flash-message status="session('status')" /></div>
+                <div class="md:flex items-end h-20 mb-12 md:mb-4"><p class="text-2xl mr-4">{{$day}}</p><output id="realtime" class="text-3xl w-20"></output><x-flash-message status="session('status')" /></div>
                 <div class="container">
                   @foreach ($itmes as $itme)
                   <div class="attendance">
                     <p class="name">{{$itme->user_name}}</p>
                     <table>
-                      <tr class="flex items-end px-4"><td class="w-20 text-gray-700">出勤</td><td class="text-2xl">{{$itme->punchIn}}</td></tr>
+                      <tr class="flex items-end px-4"><td class="w-20 text-gray-700">出勤</td><td class="text-2xl">{{ date('H:i:s', strtotime($itme->punchIn ?? '00:00:00')) }}</td></tr>
                       {{-- <tr class="flex items-end px-4"><td class="w-20 text-gray-700">休憩開始</td><td class="text-2xl">{{$itme->breakIn}}</td></tr>
                       <tr class="flex items-end px-4"><td class="w-20 text-gray-700">休憩終了</td><td class="text-2xl">{{$itme->breakOut}}</td></tr> --}}
-                      <tr class="flex items-end px-4"><td class="w-20 text-gray-700">退勤</td><td class="text-2xl">{{$itme->punchOut}}</td></tr>
+                      <tr class="flex items-end px-4"><td class="w-20 text-gray-700">退勤</td><td class="text-2xl">{{ date('H:i:s', strtotime($itme->punchOut ?? '00:00:00')) }}</td></tr>
                       <tr class="flex items-end px-4"><td class="w-20 text-gray-700">勤務時間</td><td class="text-2xl">{{$itme->workTime}}</td></tr>
                     </table>
                   </div>
