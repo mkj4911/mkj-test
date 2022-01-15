@@ -40,7 +40,7 @@
                       <button class="text-3xl text-white bg-gray-500 h-24 w-24 ring-8 ring-gray-600 rounded-full hover:bg-gray-400">退勤</button>
                     </form>
                   </div>
-                  <div class="flex justify-around items-end md:w-1/2 mb-8">
+                  {{-- <div class="flex justify-around items-end md:w-1/2 mb-8">
                     <a onclick="location.href='{{ route('member.time.performance') }}'">
                       <button class="text-white bg-gray-500 h-8 w-28 ring-8 ring-gray-600 rounded-full hover:bg-gray-400">勤怠実績</button>
                     </a>
@@ -48,11 +48,7 @@
                     <a onclick="location.href='{{ route('member.time.daily') }}'">
                       <button class="text-white bg-gray-500 h-8 w-28 ring-8 ring-gray-600 rounded-full hover:bg-gray-400">日次勤怠</button>
                     </a>
-                  </div>
-                
-                {{-- <a onclick="location.href='{{ route('member.time.index') }}'">
-                  <button class="text-white bg-gray-500 h-8 w-20 ring-8 ring-gray-600 rounded-full hover:bg-gray-400">戻る</button>
-                </a> --}}
+                  </div> --}}
                 <script src="{{asset('/js/time.js')}}"></script>
               </div>
           </div>

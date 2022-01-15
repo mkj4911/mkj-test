@@ -121,11 +121,20 @@ class TimeController extends Controller
         $breakIn = new Carbon($timeOut->breakIn);
         $breakOut = new Carbon($timeOut->breakOut);
         //実労時間(Minute)
-        $stayTime = $punchIn->diffInMinutes($now);
-        $breakTime = $breakIn->diffInMinutes($breakOut);
+        $stayTime = $punchIn->diffInSeconds($now);
+        $breakTime = $breakIn->diffInSeconds($breakOut);
         $workingMinute = $stayTime - $breakTime;
         //15分刻み
-        $workingHour = ceil($workingMinute / 15) * 0.25;
+        $workingHour = $workingMinute;
+
+        $seconds = $workingMinute;
+
+        $hours = floor($seconds / 3600);
+        $minutes = floor(($seconds / 60) % 60);
+        $seconds = $seconds % 60;
+
+        $hms = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+
 
         //退勤処理がされていない場合のみ退勤処理を実行
         if ($timeOut) {
@@ -135,7 +144,7 @@ class TimeController extends Controller
                 } else {
                     $timeOut->update([
                         'punchOut' => Carbon::now(),
-                        'workTime' => $workingHour
+                        'workTime' => $hms
                     ]);
                     return redirect()->back()->with([
                         'message' => 'お疲れさまでした',

@@ -21,7 +21,7 @@ class CreateTimesTable extends Migration
                 ->onDelete('cascade');
             $table->dateTime('punchIn');
             $table->dateTime('punchOut')->nullable();
-            $table->float('workTime')->nullable();
+            $table->time('workTime')->nullable();
             $table->integer('month');
             $table->integer('day');
             $table->integer('year');
