@@ -43,8 +43,8 @@ class ManagementController extends Controller
             ->managementItems()
             ->selectMember($request->member ?? '0')
             ->searchKeyword($request->keyword)
-            ->sortOrder($request->sort)
-            ->paginate($request->pagination ?? '20');
+            ->searchOrder($request->search)
+            ->paginate($request->pagination ?? '50');
 
         return view('admin.management.index', compact('products', 'categories', 'members'));
     }

@@ -162,20 +162,17 @@ class Product extends Model
 
     public function scopeSearchOrder($query, $searchOrder)
     {
-        if ($searchOrder === null || $searchOrder === \Constant::SEARCH_ORDER['later']) {
-            return $query->orderBy('products.created_at', 'desc');
+        if ($searchOrder === null || $searchOrder === \Constant::SEARCH_ORDER['recommend']) {
+            return $query->orderBy('products.updated_at', 'desc');
         }
-        if ($searchOrder === \Constant::SEARCH_ORDER['older']) {
-            return $query->orderBy('products.created_at', 'asc');
-        }
-        if ($searchOrder === \Constant::SEARCH_ORDER['delete']) {
+        if ($searchOrder === \Constant::SEARCH_ORDER['deleted']) {
             return $query->orderBy('products.deleted_at', 'desc');
         }
         if ($searchOrder === \Constant::SEARCH_ORDER['saleok']) {
-            return $query->orderBy('products.is_selling', true);
+            return $query->where('products.is_selling', true);
         }
-        if ($searchOrder === \Constant::SEARCH_ORDER['saleno']) {
-            return $query->orderBy('products.id_selling', false);
+        if ($searchOrder === \Constant::SEARCH_ORDER['saleng']) {
+            return $query->where('products.is_selling', false);
         }
     }
 
