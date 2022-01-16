@@ -26,6 +26,9 @@
                     <x-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.index')">
                         スタッフ管理
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.times.index')" :active="request()->routeIs('admin.times.index')">
+                        勤怠管理
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.shops.index')" :active="request()->routeIs('admin.shops.index')">
                         店舗情報
                     </x-nav-link>
@@ -91,6 +94,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.index')">
                 スタッフ管理
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.times.index')" :active="request()->routeIs('admin.times.index')">
+                勤怠管理
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.shops.index')" :active="request()->routeIs('admin.shops.index')">
                 店舗情報

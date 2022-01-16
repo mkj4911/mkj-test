@@ -15,7 +15,7 @@
                   <div class="text-lg">{{ $itme->member->name }}さん</div>
                   <div class="attendance mt-4">
                     <table>
-                      <tr class="flex items-center px-4"><td class="w-24 text-gray-700">出勤時刻：</td><td class="text-2xl tracking-widest">{{ date('H:i:s', strtotime($itme->punchIn ?? '00:00:00')) }}</td><td class="ml-2 text-md text-gray-700">{{ date('Y-m-d', strtotime($itme->punchIn ?? '0000-00-00')) }}</td></tr>
+                      <tr class="flex items-center px-4"><td class="w-24 text-gray-700">出勤時刻：</td><td class="text-2xl tracking-widest">{{ date('H:i:s', strtotime($itme->punchIn ?? '00:00:00')) }}</td><td class="ml-2 text-md text-gray-700">{{ date('Y-m-d', strtotime($itme->punchIn ?? '00:00:00')) }}</td></tr>
                       <tr class="flex items-center px-4"><td class="w-24 text-gray-700">退勤時刻：</td><td class="text-2xl tracking-widest">{{ date('H:i:s', strtotime($itme->punchOut ?? '00:00:00')) }}</td><td class="ml-2 text-md text-gray-700">{{ date('Y-m-d', strtotime($itme->punchOut ?? '00:00:00')) }}</td></tr>
                       <tr class="flex items-center px-4"><td class="w-24 text-gray-700">勤務時間：</td><td class="text-2xl tracking-widest">{{$itme->workTime}}</td></tr>
                     </table>

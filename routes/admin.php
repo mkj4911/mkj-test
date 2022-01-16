@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SalesController;
+use App\Http\Controllers\Admin\AttendanceController;
 
 
 /*
@@ -76,6 +77,10 @@ Route::prefix('categories')->middleware('auth:admin')->group(function () {
     Route::get('subindex/{primary}', [CategoryController::class, 'subindex'])->name('categories.subindex');
     Route::post('substore/{primary}', [CategoryController::class, 'substore'])->name('categories.substore');
     Route::delete('subdestroy/{secondary}', [CategoryController::class, 'subdestroy'])->name('categories.subdestroy');
+});
+
+Route::prefix('times')->middleware('auth:admin')->group(function () {
+    Route::get('index', [AttendanceController::class, 'index'])->name('times.index');
 });
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
