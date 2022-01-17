@@ -31,7 +31,7 @@
                                 <option value="{{ \Constant::SEARCH_ORDER['deleted']}}"
                                     @if(\Request::get('search') === \Constant::SEARCH_ORDER['deleted'] )
                                     selected
-                                    @endif>削除日
+                                    @endif>削除申請中
                                 </option> 
                                 <option value="{{ \Constant::SEARCH_ORDER['saleok']}}"
                                     @if(\Request::get('search') === \Constant::SEARCH_ORDER['saleok'] )

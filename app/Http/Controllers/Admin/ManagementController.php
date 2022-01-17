@@ -62,4 +62,17 @@ class ManagementController extends Controller
             compact('product', 'quantity', 'stocks')
         );
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'delete' => 'required',
+        ]);
+
+        $product = Product::withTrashed()->findOrFail($id);
+        $product->delete = $request->delete;
+        $product->save();
+
+        return back();
+    }
 }

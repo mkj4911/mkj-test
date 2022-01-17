@@ -33,6 +33,7 @@ class Product extends Model
         'image7',
         'image8',
         'image9',
+        'delete',
     ];
 
     public function member()
@@ -166,7 +167,8 @@ class Product extends Model
             return $query->orderBy('products.updated_at', 'desc');
         }
         if ($searchOrder === \Constant::SEARCH_ORDER['deleted']) {
-            return $query->orderBy('products.deleted_at', 'desc');
+            return $query->orderBy('products.deleted_at', 'desc')
+                ->whereNotNull('products.deleted_at');
         }
         if ($searchOrder === \Constant::SEARCH_ORDER['saleok']) {
             return $query->where('products.is_selling', true);

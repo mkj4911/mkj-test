@@ -93,12 +93,6 @@
                               </div>
                         </div>
                         <div class="md:w-1/3 ml-8">
-                            <button type="button" onclick="history.back()" class="flex mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                </svg>
-                                <span class="text-gray-700 font-medium">戻る</span>
-                            </button>
                             <h1 class="mb-4 text-gray-900 text-2xl title-font font-medium">{{ $product->name }}</h1>
                             <p class="mb-4 leading-relaxed text-gray-700">{{ $product->information }}</p>
                         </div>
@@ -117,11 +111,30 @@
                                     @else 
                                     <div class="mb-2"><span>削除日：</span></div>
                                     @endif
-                                    <div class="mb-8"><span>現在庫：</span>{{ $quantity }}</div>
+                                    <div class="mb-4"><span>現在庫：</span>{{ $quantity }}</div>
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <div class="border border-t-2 mb-8"></div>
                                 <div class="title-font font-medium text-lg text-gray-900"><span class=" text-base text-gray-500">カテゴリー：</span>{{ $product->category->name }}</div>
                                 <div><span class="title-font font-medium text-2xl text-gray-900"><span class="text-lg text-gray-500">販売価格：</span>{{ number_format($product->price) }}</span><span class="text-sm text-gray-700">円(税込)</span></div>
+                                <div class="border border-t-2 my-4"></div>
+                                <h2 class="mt-4 text-lg text-gray-700">商品削除承認処理</h2>
+                                <p class="text-sm text-red-700 ml-4">変更したときは更新ボタンを押してください</p>
+                                <form method="post" action="{{ route('admin.management.update', ['item' => $product->id]) }}">
+                                    @csrf
+                                    <div class="flex justify-around">
+                                    <div class="flex items-center my-2">
+                                        <div><input type="radio" id="ok" name="delete" value="1" class="h-5 w-5" @if($product->delete === 1){ checked } @endif ></div>
+                                        <label class="ml-2 text-lg" for="ok">承認</label>
+                                    </div>
+                                    <div class="flex items-center my-2">
+                                        <div><input type="radio" id="ng" name="delete" value="0" class="h-5 w-5" @if($product->delete === 0){ checked } @endif></div>
+                                        <label class="ml-2 text-lg" for="ng">未承認</label>
+                                    </div>
+                                    </div>
+                                    <div class="flex p-2 mx-auto justify-around my-4">
+                                        <button type="button" onclick="location.href='{{ route('admin.management.index') }}'" class="mx-4 text-white bg-gray-300 h-8 w-36 ring-8 ring-gray-400 rounded-full hover:bg-gray-400 text-lg">戻る</button>
+                                        <button type="submit" class="mx-4 text-white bg-gray-500 h-8 w-36 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg">更新する</button>
+                                    </div>
+                                </form>
                         </div>
                     </div>
                     <div>
