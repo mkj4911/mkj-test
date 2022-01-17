@@ -1,9 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="md:flex">
-          勤怠管理
-          <x-flash-message status="session('status')" />
+          <div class="md:flex items-end">
+            勤怠管理
+            <x-flash-message status="session('status')" />
+          </div><br>
+          <form method="get" action="{{ route('admin.times.index') }}">
+            <div class="lg:flex lg:justify-around">
+                <div class="lg:flex items-center">
+                    <select name="member" class="mb-2 lg:mb-0 lg:mr-4" id="">
+                        <option value="0" @if(\Request::get('member') === '0') selected @endif>全て</option>
+                      @foreach($members as $member)
+                      <option value="{{ $member->id}}" @if(\Request::get('member') == $member->id) selected @endif >
+                      {{ $member->name }}
+                      </option>
+                      @endforeach
+                    </select>
+                        <div class="flex space-x-2 items-center">
+                          <div><input type="date" value="old" name="from" class="border border-gray-500 py-2 px-2"></div>
+                          <div><input type="date" value="old" name="until" class="border border-gray-500 py-2 px-2"></div>
+                            <div><button class="text-white bg-gray-500 h-8 w-36 mx-4 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg">検索する</button></div>
+                        </div>
+                </div>
         </div>
+      </div>
+    </form>
     </x-slot>
 
     <div class="py-12">

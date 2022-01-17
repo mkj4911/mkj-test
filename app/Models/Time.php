@@ -29,4 +29,29 @@ class Time extends Model
     {
         return $this->belongsTo(Member::class);
     }
+
+    //ハッシュタグレポートを取得
+    public static function scopeGetDate($query, $from, $until)
+    {
+        return $query
+            //created_atが20xx/xx/xx ~ 20xx/xx/xxのデータを取得
+            ->whereBetween('punchIn', [$from, $until])
+            ->orwhereDate('punchIn', [$until]);
+    }
+
+    public static function scopeGetDate1($query, $from)
+    {
+        return $query
+            //created_atが20xx/xx/xx ~ 20xx/xx/xxのデータを取得
+            ->whereDate('punchIn', [$from]);
+    }
+
+    public function scopeSelectMembers($query, $memberId)
+    {
+        if ($memberId !== '0') {
+            return $query->where('member_id', $memberId);
+        } else {
+            return;
+        }
+    }
 }

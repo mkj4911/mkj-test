@@ -17,11 +17,27 @@ class AttendanceController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $members = Member::select('id', 'name')->get();
         $day = Carbon::now();
-        $times = Time::select('id', 'member_id', 'punchIn', 'punchOut', 'workTime')->get();
+        //$times = Time::select('id', 'member_id', 'punchIn', 'punchOut', 'workTime')->get();
 
-        return view('admin.times.index', compact('times', 'day'));
+        //日付が選択されたら
+        if (!empty($request['from']) && !empty($request['until'])) {
+            //ハッシュタグの選択された20xx/xx/xx ~ 20xx/xx/xxのレポート情報を取得
+            $times = Time::getDate($request['from'], $request['until'])
+                ->selectMembers($request->member ?? '0')
+                ->get();
+        } elseif (!empty($request['from']) && empty($request['until'])) {
+            $times = Time::getDate1($request['from'])
+                ->selectMembers($request->member ?? '0')
+                ->get();
+        } else {
+            //リクエストデータがなければそのままで表示
+            $times = Time::selectMembers($request->member ?? '0')->get();
+        }
+
+        return view('admin.times.index', compact('members', 'times', 'day'));
     }
 }
