@@ -48,15 +48,8 @@ Route::prefix('deleted')->middleware('auth:members')->group(function () {
 
 Route::prefix('time')->middleware('auth:members')->group(function () {
     Route::get('index', [TimeController::class, 'index'])->name('time.index');
-    //出退勤打刻
     Route::post('timein', [TimeController::class, 'timein'])->name('time.timein');
     Route::post('timeout', [TimeController::class, 'timeout'])->name('time.timeout');
-    //勤怠実績
-    Route::get('performance', [TimeController::class, 'performance'])->name('time.performance');
-    Route::post('performance', [TimeController::class, 'result'])->name('time.result');
-    //日次勤怠
-    Route::get('daily', [TimeController::class, 'daily'])->name('time.daily');
-    Route::post('daily', [TimeController::class, 'dailyResult'])->name('time.dailyresult');
 });
 
 Route::prefix('sales')->middleware('auth:members')->group(function () {

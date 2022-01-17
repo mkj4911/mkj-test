@@ -35,7 +35,7 @@
                                 <td class="md:px-4 py-2 border-b-2 text-xs md:text-sm font-semibold text-red-700">未処理</td>
                                 @endif
                                 <td class="md:px-4 py-2 border-b-2 text-xs md:text-sm">
-                                    <button onclick="location.href='{{ route('member.sales.edit', ['sale' => $sale->id]) }}'" class="text-xs md:text-sm text-white bg-gray-400 border-0 py-2 px-4 focus:outline-none hover:bg-gray-600 rounded">編集</button>
+                                    <button onclick="location.href='{{ route('member.sales.edit', ['sale' => $sale->id]) }}'" class="text-xs md:text-sm text-white bg-gray-400 border-0 py-2 px-4 focus:outline-none hover:bg-gray-600 rounded">販売処理</button>
                                 </td>
                                 <form id="delete_{{$sale->id}}" method="post" action="{{ route('member.sales.destroy', ['sale' => $sale->id]) }}">
                                     @csrf

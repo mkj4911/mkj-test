@@ -20,53 +20,48 @@
                               </div>
                       </div>
                     <div class="flex items-end">
-                        {{-- <div>
-                        　　 <span class="text-sm">表示順</span><br>
-                             <select name="sort" class="mr-4" id="sort">
-                                <option value="{{ \Constant::SORT_ORDER['recommend']}}"
-                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['recommend'] )
+                        <div>
+                        <span class="text-sm">表示順</span><br>
+                             <select name="search" class="mr-4" id="search">
+                                <option value="{{ \Constant::SEARCH_ORDER['recommend']}}"
+                                    @if(\Request::get('search') === \Constant::SEARCH_ORDER['recommend'] )
                                     selected
-                                    @endif>おすすめ順
+                                    @endif>更新日
+                                </option>  
+                                <option value="{{ \Constant::SEARCH_ORDER['deleted']}}"
+                                    @if(\Request::get('search') === \Constant::SEARCH_ORDER['deleted'] )
+                                    selected
+                                    @endif>削除日
                                 </option> 
-                                <option value="{{ \Constant::SORT_ORDER['higherPrice']}}"
-                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['higherPrice'] )
+                                <option value="{{ \Constant::SEARCH_ORDER['saleok']}}"
+                                    @if(\Request::get('search') === \Constant::SEARCH_ORDER['saleok'] )
                                     selected
-                                    @endif>料金の高い順
+                                    @endif>販売中
                                 </option> 
-                                <option value="{{ \Constant::SORT_ORDER['lowerPrice']}}"
-                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['lowerPrice'] )
+                                <option value="{{ \Constant::SEARCH_ORDER['saleng']}}"
+                                    @if(\Request::get('search') === \Constant::SEARCH_ORDER['saleng'] )
                                     selected
-                                    @endif>料金の安い順
-                                </option> 
-                                <option value="{{ \Constant::SORT_ORDER['later']}}"
-                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['later'] )
-                                    selected
-                                    @endif>新しい順
-                                </option> 
-                                <option value="{{ \Constant::SORT_ORDER['older']}}"
-                                    @if(\Request::get('sort') === \Constant::SORT_ORDER['older'] )
-                                    selected
-                                    @endif>古い順
+                                    @endif>停止中
                                 </option> 
                              </select>
-                        </div> --}}
+                        </div>
                         <div>
                             <span class="text-sm">表示件数</span><br>
                             <select id="pagination" name="pagination">
-                                <option value="20"
-                                    @if(\Request::get('pagination') === '20')
-                                    selected
-                                    @endif>20件
-                                </option>
                                 <option value="50"
                                     @if(\Request::get('pagination') === '50')
                                     selected
                                     @endif>50件
-                               </option>
-                               <option value="100"
+                                </option>
+                                <option value="100"
                                     @if(\Request::get('pagination') === '100')
                                     selected
                                     @endif>100件
+                               </option>
+                               <option value="250"
+                                    @if(\Request::get('pagination') === '250')
+                                    selected
+                                    @endif>250件
                                </option>
                                </select>
                         </div>
@@ -120,10 +115,10 @@
         </div>
     </div>
     <script>
-        // const select = document.getElementById('sort')
-        // select.addEventListener('change', function(){
-        //     this.form.submit()
-        // })
+        const select = document.getElementById('search')
+        select.addEventListener('change', function(){
+            this.form.submit()
+        })
         const paginate = document.getElementById('pagination')
         paginate.addEventListener('change', function(){
             this.form.submit()

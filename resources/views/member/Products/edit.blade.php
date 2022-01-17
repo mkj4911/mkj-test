@@ -48,8 +48,14 @@
                         </div>
                         <div class="p-2 md:w-1/2 mx-auto">
                             <div class="relative flex justify-around">
-                                <div><input type="radio" name="type" value="{{ \Constant::PRODUCT_LIST['add'] }}" class="h-5 w-5 mr-2" checked >追加</div>
-                                <div><input type="radio" name="type" value="{{ \Constant::PRODUCT_LIST['reduce'] }}" class="h-5 w-5 mr-2" >削減</div>
+                                <div class="flex">
+                                    <input type="radio" id="add" name="type" value="{{ \Constant::PRODUCT_LIST['add'] }}" class="h-5 w-5 mr-2" checked >
+                                    <label class="ml-2" for="add">追加</label>
+                                </div>
+                                <div class="flex">
+                                    <input type="radio" id="reduce" name="type" value="{{ \Constant::PRODUCT_LIST['reduce'] }}" class="h-5 w-5 mr-2" >
+                                    <label class="ml-2" for="reduce">削減</label>
+                                </div>
                             </div>
                         </div>
                         <div class="p-2 md:w-1/2 mx-auto">
@@ -88,8 +94,14 @@
                         </div>
                         <div class="p-2 w-1/2 mx-auto">
                             <div class="relative flex justify-around">
-                                <div><input type="radio" name="is_selling" value="1" class="mr-2 h-5 w-5" @if($product->is_selling === 1){ checked } @endif >販売中</div>
-                                <div><input type="radio" name="is_selling" value="0" class="mr-2 h-5 w-5" @if($product->is_selling === 0){ checked } @endif>停止中</div>
+                            <div class="flex">
+                                <input type="radio" id="selling1" name="is_selling" value="1" class="mr-2 h-5 w-5" @if($product->is_selling === 1){ checked } @endif >
+                                <label class="ml-2" for="selling1">販売中</label>
+                            </div>
+                            <div class="flex">
+                                <input type="radio" id="selling0" name="is_selling" value="0" class="mr-2 h-5 w-5" @if($product->is_selling === 0){ checked } @endif>
+                                <label class="ml-2" for="selling0">停止中</label>
+                            </div>
                             </div>
                         </div>
                         <div class="p-2 w-full flex justify-around mt-4">
