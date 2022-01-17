@@ -22,7 +22,7 @@
                       </div>
                     <div class="flex">
                         <div>
-                        　　 <span class="text-sm">表示順</span><br>
+                             <span class="text-sm">表示順</span><br>
                              <select name="sort" class="mr-4" id="sort">
                                 <option value="{{ \Constant::SORT_ORDER['recommend']}}"
                                     @if(\Request::get('sort') === \Constant::SORT_ORDER['recommend'] )

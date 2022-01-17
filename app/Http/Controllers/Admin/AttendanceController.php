@@ -38,6 +38,9 @@ class AttendanceController extends Controller
             $times = Time::selectMembers($request->member ?? '0')->get();
         }
 
-        return view('admin.times.index', compact('members', 'times', 'day'));
+        $from = $request->input('from');
+        $until = $request->input('until');
+
+        return view('admin.times.index', compact('members', 'times', 'day', 'from', 'until'));
     }
 }
