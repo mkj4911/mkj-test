@@ -1,12 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="md:flex">
           <div class="md:flex items-end">
             勤怠管理
             <x-flash-message status="session('status')" />
-          </div><br>
+          </div>
+          <div class="lg:flex lg:justify-around">
           <form method="get" action="{{ route('admin.times.index') }}">
-            <div class="lg:flex lg:justify-around">
                 <div class="lg:flex items-center">
                     <select name="member" class="mb-2 lg:mb-0 lg:mr-4" id="">
                         <option value="0" @if(\Request::get('member') === '0') selected @endif>全て</option>
@@ -16,14 +15,13 @@
                       </option>
                       @endforeach
                     </select>
-                        <div class="flex space-x-2 items-center">
-                          <div><input type="date" value="old" name="from" class="border border-gray-500 py-2 px-2"></div>
-                          <div><input type="date" value="old" name="until" class="border border-gray-500 py-2 px-2"></div>
-                            <div><button class="text-white bg-gray-500 h-8 w-36 mx-4 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg">検索する</button></div>
-                        </div>
+                    <div class="flex space-x-4 items-center">
+                      <div><input type="date" valu="" name="from" class="border border-gray-500 py-2 px-2"></div>
+                      <div><input type="date" value="" name="until" class="border border-gray-500 py-2 px-2"></div>
+                        <div><button class="text-white bg-gray-500 h-8 w-36 mx-4 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg">検索する</button></div>
+                    </div>
                 </div>
         </div>
-      </div>
     </form>
     </x-slot>
 
@@ -32,6 +30,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex items-end mb-8 md:mb-4"><p class="text-2xl mr-8 my-2 items-end">{{ $day->format('Y-m-d') }}</p><output id="realtime" class="flex items-end text-4xl w-20 tracking-widest"></output></div>
+                    <div class="flex items-end my-1"><p>検索期間：</p><p class="text-lg">{{ $from}}</p>@if(!empty($from))<p class="text-lg">～</p>@endif<p class="text-lg">{{ $until }}</p></div>
                     <table class="table-fixed w-full text-left whitespace-no-wrap">
                         <thead>
                           <tr>
