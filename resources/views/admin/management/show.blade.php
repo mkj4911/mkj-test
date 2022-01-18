@@ -116,6 +116,7 @@
                                 <div class="title-font font-medium text-lg text-gray-900"><span class=" text-base text-gray-500">カテゴリー：</span>{{ $product->category->name }}</div>
                                 <div><span class="title-font font-medium text-2xl text-gray-900"><span class="text-lg text-gray-500">販売価格：</span>{{ number_format($product->price) }}</span><span class="text-sm text-gray-700">円(税込)</span></div>
                                 <div class="border border-t-2 my-4"></div>
+                                @if(!empty($product->deleted_at))
                                 <h2 class="mt-4 text-lg text-gray-700">商品削除承認処理</h2>
                                 <p class="text-sm text-red-700 ml-4">変更したときは更新ボタンを押してください</p>
                                 <form method="post" action="{{ route('admin.management.update', ['item' => $product->id]) }}">
@@ -135,6 +136,9 @@
                                         <button type="submit" class="mx-4 text-white bg-gray-500 h-8 w-36 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg">更新する</button>
                                     </div>
                                 </form>
+                                @else 
+                                    <div class="flex justify-around"><button type="button" onclick="history.back()" class="mx-4 text-white bg-gray-300 h-8 w-36 ring-8 ring-gray-400 rounded-full hover:bg-gray-400 text-lg">戻る</button></div>
+                                @endif
                         </div>
                     </div>
                     <div>

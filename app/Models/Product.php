@@ -240,6 +240,7 @@ class Product extends Model
                 'image1.filename as filename',
                 'products.image1',
                 'stock.quantity as quantity',
+                'products.delete',
             );
     }
 }
