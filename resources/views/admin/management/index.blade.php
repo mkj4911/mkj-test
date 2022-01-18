@@ -31,7 +31,7 @@
                                 <option value="{{ \Constant::SEARCH_ORDER['deleted']}}"
                                     @if(\Request::get('search') === \Constant::SEARCH_ORDER['deleted'] )
                                     selected
-                                    @endif>削除日
+                                    @endif>削除中
                                 </option> 
                                 <option value="{{ \Constant::SEARCH_ORDER['saleok']}}"
                                     @if(\Request::get('search') === \Constant::SEARCH_ORDER['saleok'] )
@@ -86,6 +86,13 @@
                                         @else    
                                           <span class="border rounded-full py-1 px-2 bg-red-400 text-white text-xs">停止中</span>
                                         @endif
+                                        @if (!empty($product->deleted_at) && ($product->delete ===0))
+                                        <span class="text-sm text-red-700 font-semibold">削除申請中</span>
+                                        @elseif (!empty($product->deleted_at) && ($product->delete ===1))
+                                        <span class="text-sm text-indigo-700 font-semibold">削除受理済</span>
+                                      @else    
+                                        <span></span>
+                                      @endif
                                     </div>
                                     <div><span>現在庫：</span>{{ $product->quantity }}</div>
                                     </div> 

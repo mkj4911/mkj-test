@@ -23,10 +23,14 @@
                                         @csrf
                                             <a href="#" data-id="{{ $product->id }}" onclick="updatePost(this)" class="text-white text-sm bg-gray-400 border-0 py-2 px-8 md:px-4 focus:outline-none hover:bg-gray-600 rounded">復元</a>
                                     </form>
+                                    @if ($product->delete === 1)
                                     <form id="delete_{{$product->id}}" method="post" action="{{ route('member.deleted.destroy', ['item' => $product->id]) }}">
                                         @csrf
                                             <a href="#" data-id="{{ $product->id }}" onclick="deletePost(this)" class="text-white text-sm bg-red-400 border-0 py-2 px-8 md:px-4 ml-4 focus:outline-none hover:bg-red-600 rounded">削除</a>
                                     </form>
+                                    @else
+                                        <p class="text-red-700 font-semibold mx-4">削除申請中</p>
+                                    @endif
                                     </div>
                                 </div>
                             </div>

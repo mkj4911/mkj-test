@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 use App\Models\Sale;
 use App\Models\User;
@@ -111,19 +113,25 @@ class CartController extends Controller
 
     public function success()
     {
+        try {
+            DB::transaction(function () {
+                $sales = Cart::where('user_id', Auth::id())->get();
+                $productsSale = SaleService::getItemsSale($sales);
 
-        $sales = Cart::where('user_id', Auth::id())->get();
-        $productsSale = SaleService::getItemsSale($sales);
+                $items = Cart::where('user_id', Auth::id())->get();
+                $products = CartService::getItemsInCart($items);
+                $user = User::findOrFail(Auth::id());
 
-        $items = Cart::where('user_id', Auth::id())->get();
-        $products = CartService::getItemsInCart($items);
-        $user = User::findOrFail(Auth::id());
-
-        SendThanksMail::dispatch($products, $user);
-        foreach ($products as $product) {
-            SendOrderedMail::dispatch($product, $user);
+                SendThanksMail::dispatch($products, $user);
+                foreach ($products as $product) {
+                    SendOrderedMail::dispatch($product, $user);
+                }
+            }, 2);
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
         }
-        //dd('ユーザーメール送信');
+
 
         Cart::where('user_id', Auth::id())->delete();
 

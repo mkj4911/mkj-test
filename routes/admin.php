@@ -61,6 +61,7 @@ Route::prefix('holiday')->middleware('auth:admin')->group(function () {
 Route::prefix('management')->middleware('auth:admin')->group(function () {
     Route::get('index', [ManagementController::class, 'index'])->name('management.index');
     Route::get('show/{item}', [ManagementController::class, 'show'])->name('management.show');
+    Route::post('update/{item}', [ManagementController::class, 'update'])->name('management.update');
 });
 
 Route::prefix('sales')->middleware('auth:admin')->group(function () {
