@@ -86,29 +86,33 @@
                                         @else    
                                           <span class="border rounded-full py-1 px-2 bg-red-400 text-white text-xs">停止中</span>
                                         @endif
-                                        @if (!empty($product->deleted_at) && ($product->delete ===0))
-                                        <span class="text-sm text-red-700 font-semibold">削除申請中</span>
-                                        @elseif (!empty($product->deleted_at) && ($product->delete ===1))
-                                        <span class="text-sm text-indigo-700 font-semibold">削除受理済</span>
-                                      @else    
-                                        <span></span>
-                                      @endif
                                     </div>
                                     <div><span>現在庫：</span>{{ $product->quantity }}</div>
                                     </div> 
-                                    <div class=" hover:animate-pulse"><x-thumbnail filename="{{$product->filename ?? ''}}" type="products" /></div>
-                                    <div class="mt-4">
-                                        <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><span>担当者：</span>{{ $product->member_name }}</h3>
-                                        <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><span>登録日：</span>{{ date_format($product->created_at, 'Y-m-d')}}</h2>
-                                            @if ($product->deleted_at)
-                                            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><span>削除日：</span>{{ date_format($product->deleted_at, 'Y-m-d') }}</h2>
-                                            @else 
-                                            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><span>削除日：</span></h2>
+                                    <div><x-thumbnail filename="{{$product->filename ?? ''}}" type="products" /></div>
+                                    <div class="mt-4 flex">
+                                        <div class="">
+                                            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><span>担当者：</span>{{ $product->member_name }}</h3>
+                                            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><span>登録日：</span>{{ date_format($product->created_at, 'Y-m-d')}}</h2>
+                                                @if ($product->deleted_at)
+                                                <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><span>削除日：</span>{{ date_format($product->deleted_at, 'Y-m-d') }}</h2>
+                                                @else 
+                                                <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1"><span>削除日：</span></h2>
+                                                @endif
+                                            <h2 class="text-gray-900 title-font text-lg font-medium">{{ $product->name }}</h2>
+                                        </div>
+                                        <div class="flex items-center ml-4">
+                                            @if (!empty($product->deleted_at) && ($product->delete ===0))
+                                            <span class="text-sm text-red-700 font-semibold animate-pulse">削除申請中</span>
+                                            @elseif (!empty($product->deleted_at) && ($product->delete ===1))
+                                            <span class="text-sm text-indigo-700 font-semibold">削除受理済</span>
+                                            @else    
+                                            <span></span>
                                             @endif
-                                        <h2 class="text-gray-900 title-font text-lg font-medium">{{ $product->name }}</h2>
+                                        </div>
+                                    </div>
                                         {{-- <p class="mt-1">{{ number_format($product->price) }}<span class="text-sm text-gray-700">円(税込)</span></p> --}}
                                     </div>
-                                </div>
                                 </a>
                             </div>
                          @endforeach
