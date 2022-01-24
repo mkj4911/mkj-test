@@ -5,6 +5,9 @@
     if($type === 'products'){
         $path = 'storage/products/';
     }
+    if($type === 'members'){
+        $path = 'storage/members/';
+    }
 @endphp
 
 <div>

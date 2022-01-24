@@ -6,7 +6,7 @@ if(session('status') === 'alert'){$bgColor = 'bg-red-500';}
 @endphp
 
 @if(session('message'))
- <div id="flash" class="{{ $bgColor }} w-1/2 mx-auto rounded-full my-4 py-2 px-4 text-white text-center">
+ <div id="flash" class="{{ $bgColor }} w-1/2 mx-auto rounded-full my-4 py-2 px-4 text-white text-center animate-pulse">
    {{ session('message')}}
  </div>
 @endif
@@ -16,5 +16,5 @@ if(session('status') === 'alert'){$bgColor = 'bg-red-500';}
     flash.style.visibility = "visible";
     setTimeout(function(){
       flash.style.visibility = "hidden";
-    }, 2000);
+    }, 5000);
 </script>

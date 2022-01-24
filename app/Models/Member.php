@@ -24,6 +24,7 @@ class Member extends Authenticatable
         'name',
         'email',
         'password',
+        'filename',
     ];
 
     /**
