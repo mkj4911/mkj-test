@@ -10,6 +10,10 @@ use Carbon\Carbon;
 use Throwable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use InterventionImage;
+use App\Http\Requests\UploadImageRequest;
+use App\Services\ImageService;
 
 class MemberController extends Controller
 {
@@ -20,23 +24,7 @@ class MemberController extends Controller
 
     public function index()
     {
-        // $date_now = Carbon::now();
-        // $date_parse = Carbon::parse(now());
-        // echo $date_now->year;
-        // echo $date_parse;
-
-        // $e_all = Owner::all();
-        // $q_get = DB::table('owners')->select('name', 'created_at')->get();
-        // $q_first = DB::table('owners')->select('name')->first();
-
-        // $c_test = collect([
-        //     'name' => 'test'
-        // ]);
-
-        // var_dump($q_first);
-
-        // dd($e_all, $q_get, $q_first, $c_test);
-        $members = Member::select('id', 'name', 'email', 'created_at')->paginate(5);
+        $members = Member::select('id', 'name', 'email', 'filename', 'created_at')->paginate(9);
 
         return view(
             'admin.members.index',
@@ -49,18 +37,20 @@ class MemberController extends Controller
         return view('admin.members.create');
     }
 
-    public function store(Request $request)
+    public function store(UploadImageRequest $request)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:members',
             'password' => 'required|string|confirmed|min:8',
         ]);
 
-        Member::create([
+        $member = Member::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'filename' => '',
         ]);
 
         return redirect()
@@ -83,13 +73,23 @@ class MemberController extends Controller
         return view('admin.members.edit', compact('member'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UploadImageRequest $request, $id)
     {
+        $imageFile = $request->image;
+        if (!is_null($imageFile) && $imageFile->isValid()) {
+            $fileNameToStore = ImageService::upload($imageFile, 'members');
+        }
+
         $member = Member::findOrFail($id);
         $member->name = $request->name;
         $member->email = $request->email;
         $member->password = Hash::make($request->password);
+        if (!is_null($imageFile) && $imageFile->isValid()) {
+            $member->filename = $fileNameToStore;
+        }
         $member->save();
+
+
 
         return redirect()
             ->route('admin.members.index')
