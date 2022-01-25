@@ -21,9 +21,9 @@
                                   <div class="flex items-center"> 
                                       <div class="w-1/3 mr-2">
                                           @if (empty($member->filename))
-                                          <img class="mx-auto w-20 h-20 object-cover rounded-full"  src="{{ asset('images/no_face.jpg') }}">
+                                          <img class="mx-auto w-24 h-24 object-cover rounded-full"  src="{{ asset('images/no_face.jpg') }}">
                                           @else
-                                          <img class="mx-auto w-20 h-20 object-cover rounded-full" src="{{ asset('storage/members/' . $member->filename )}}">
+                                          <img class="mx-auto w-24 h-20 rounded-md" src="{{ asset('storage/members/' . $member->filename )}}">
                                           @endif  
                                       </div>
                                   <div class="w-2/3 mt-4 flex">
