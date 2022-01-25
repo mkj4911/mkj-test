@@ -19,8 +19,8 @@
                             <table class="table-auto w-full text-left whitespace-no-wrap">
                               <thead>
                                 <tr>
+                                  <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl"></th>
                                   <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">氏名</th>
-                                  <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メールアドレス</th>
                                   <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">解除した日</th>
                                   <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                                   <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
@@ -30,18 +30,24 @@
                                 @if(count($expiredMembers) > 0)
                                 @foreach ($expiredMembers as $member)
                                     <tr>
-                                    <td class="md:px-4 py-3">{{ $member->name }}</td>
-                                    <td class="md:px-4 py-3">{{ $member->email }}</td>
-                                    <td class="md:px-4 py-3">{{ $member->deleted_at->diffForHumans() }}</td>
+                                    <td class="md:px-4 py-2 border-b-2">
+                                        @if (empty($member->filename))
+                                        <img class="mx-auto w-20 h-16 rounded-md"  src="{{ asset('images/no_face.jpg') }}">
+                                        @else
+                                        <img class="mx-auto w-20 h-16 rounded-md" src="{{ asset('storage/members/' . $member->filename )}}">
+                                        @endif  
+                                    </td>
+                                    <td class="md:px-4 py-2 border-b-2">{{ $member->name }}</td>
+                                    <td class="md:px-4 py-2 border-b-2">{{ $member->deleted_at->diffForHumans() }}</td>
                                     <form id="update_{{$member->id}}" method="post" action="{{ route('admin.expired-members.update', ['member' => $member->id]) }}">
                                         @csrf
-                                        <td class="md:px-4 py-3 text-center">
+                                        <td class="md:px-4 py-2 border-b-2 text-center">
                                             <a href="#" data-id="{{ $member->id }}" onclick="updatePost(this)" class="text-white bg-gray-400 border-0 py-2 px-4 focus:outline-none hover:bg-gray-600 rounded">復元</a>
                                         </td>
                                     </form>
                                     <form id="delete_{{$member->id}}" method="post" action="{{ route('admin.expired-members.destroy', ['member' => $member->id]) }}">
                                         @csrf
-                                        <td class="md:px-4 py-3 text-center">
+                                        <td class="md:px-4 py-2 border-b-2 text-center">
                                             <a href="#" data-id="{{ $member->id }}" onclick="deletePost(this)" class="text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded">削除</a>
                                         </td>
                                     </form>

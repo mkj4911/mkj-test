@@ -35,6 +35,7 @@ class Sale extends Model
                 'users.name as user_name',
                 'users.email as user_email',
                 'products.name as product_name',
+                'sales.product_id as product_id',
                 'sales.price as price',
                 'sales.quantity as quantity',
                 'sales.created_at as created_at',

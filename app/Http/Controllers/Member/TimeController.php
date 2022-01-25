@@ -9,6 +9,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UploadImageRequest;
+use App\Services\ImageService;
+
 
 class TimeController extends Controller
 {
@@ -35,7 +38,7 @@ class TimeController extends Controller
     public function index()
     {
 
-        $member = Member::with('time')
+        $members = Member::with('time')
             ->where('id', Auth::id())
             ->get();
 
@@ -46,7 +49,7 @@ class TimeController extends Controller
             $format = $today->format('Y年m月d日');
             //当日の勤怠を取得
             $items = Time::GetMonthAttendance($month)->GetDayAttendance($day)->where('member_id', Auth::id())->get();
-            return view('member.time.index', ['itmes' => $items, 'day' => $format, 'member' => $member]);
+            return view('member.time.index', ['itmes' => $items, 'day' => $format, 'members' => $members]);
         } else {
             return redirect('member.dashboard');
         }
@@ -169,5 +172,29 @@ class TimeController extends Controller
                 'status' => 'alert'
             ]);
         }
+    }
+
+    public function update(UploadImageRequest $request)
+    {
+        $imageFile = $request->image;
+        if (!is_null($imageFile) && $imageFile->isValid()) {
+            $fileNameToStore = ImageService::upload($imageFile, 'members');
+        }
+
+        $member = Member::where('id', Auth::id())->first();
+        if (!is_null($imageFile) && $imageFile->isValid()) {
+            $member->filename = $fileNameToStore;
+        }
+
+        $member->save();
+
+
+
+        return redirect()
+            ->back()
+            ->with([
+                'message' => 'スタッフの情報を更新しました。',
+                'status' => 'info'
+            ]);
     }
 }

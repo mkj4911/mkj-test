@@ -60,10 +60,25 @@
                           </div>
                          </div>
                         </form>
+                        <form id="delete_{{$member->id}}" method="post" action="{{ route('admin.members.destroy', ['member' => $member->id]) }}">
+                          @csrf
+                          @method('delete')
+                          <div class="p-2 w-full flex justify-around my-16">
+                              <button type="button" data-id="{{ $member->id }}" onclick="deletePost(this)" class="text-white bg-red-500 h-8 w-36 ring-8 ring-red-600 rounded-full hover:bg-red-300 text-lg">登録解除</button>
+                          </div>
+                      </form>
                     </div>
                   </section>
             </div>
         </div>
     </div>
 </div>
+<script>
+  function deletePost(e) {
+      'use strict';
+      if(confirm('本当に削除してもいいですか？')){
+      document.getElementById('delete_'+e.dataset.id).submit();
+      }
+  }
+</script>
 </x-app-layout>

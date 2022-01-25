@@ -50,6 +50,7 @@ Route::prefix('time')->middleware('auth:members')->group(function () {
     Route::get('index', [TimeController::class, 'index'])->name('time.index');
     Route::post('timein', [TimeController::class, 'timein'])->name('time.timein');
     Route::post('timeout', [TimeController::class, 'timeout'])->name('time.timeout');
+    Route::post('update', [TimeController::class, 'update'])->name('time.update');
 });
 
 Route::prefix('sales')->middleware('auth:members')->group(function () {
