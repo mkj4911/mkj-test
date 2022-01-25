@@ -13,7 +13,7 @@
                     @if(count($historys) > 0)
                       @foreach($historys as $history)
                       <a href="{{ route('user.items.show', ['item' => $history->product_id])}}">
-                        <div class="md:flex md:items-end mb-2 border-b" >
+                        <div class="md:flex md:items-end mb-2 border-b hover:bg-gray-100" >
                             <div class="md:w-2/12">
                                 @if ($history->filename !== null)
                                 <img class="rounded-md md:w-32 md:h-20 w-40 h-20" src="{{ asset('storage/products/' . $history->filename )}}">
