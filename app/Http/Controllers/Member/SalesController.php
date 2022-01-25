@@ -81,7 +81,7 @@ class SalesController extends Controller
                 break;
             } else {
                 Stock::create([
-                    'product_id' => $product->id,
+                    'product_id' => $sales->product_id,
                     'type' => \Constant::PRODUCT_LIST['return'],
                     'quantity' => $sales->quantity,
                 ]);
