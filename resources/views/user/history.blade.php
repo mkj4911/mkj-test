@@ -12,6 +12,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     @if(count($historys) > 0)
                       @foreach($historys as $history)
+                      <a href="{{ route('user.items.show', ['item' => $history->product_id])}}">
                         <div class="md:flex md:items-end mb-2 border-b" >
                             <div class="md:w-2/12">
                                 @if ($history->filename !== null)
@@ -26,6 +27,7 @@
                             <div class="md:w-2/12"><span class="text-xs text-gray-700">　合計：</span>{{ number_format($history->quantity * $history->price) }}<span class="text-sm text-gray-700">円(税込)</span></div>
                             <div class="md:w-2/12"><span class="text-xs text-gray-700">購入日：</span>{{ date('Y-m-d', strtotime($history->created_at)) }}</div>
                         </div>
+                      </a>
                       @endforeach
                     @else
                         履歴はありません。
