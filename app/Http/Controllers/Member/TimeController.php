@@ -193,7 +193,7 @@ class TimeController extends Controller
         return redirect()
             ->back()
             ->with([
-                'message' => 'スタッフの情報を更新しました。',
+                'message' => '画像を更新しました。',
                 'status' => 'info'
             ]);
     }

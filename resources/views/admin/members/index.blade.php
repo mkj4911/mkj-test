@@ -12,6 +12,7 @@
               <div class="p-2 bg-white border-b border-gray-200">
                   <div class="flex justify-end my-4">
                       <button onclick="location.href='{{ route('admin.members.create') }}'" class="text-white bg-gray-500 h-8 w-36 mr-8 mx-4 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg">新規登録する</button>
+                      <button onclick="location.href='{{ route('admin.expired-members.index') }}'" class="text-white bg-gray-500 h-8 w-36 mr-8 mx-4 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg">登録解除一覧</button>
                   </div>
                   <div class="flex flex-wrap justify-around md:justify-start">
                        @foreach ($members as $member)

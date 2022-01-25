@@ -64,14 +64,16 @@ php artisan migrate:fresh --seed
 php artisan serve で簡易サーバーを立ち上げ、表示確認してください。
 
 インストール後の実施事項
-画像のダミーデータは public/imagesフォルダ内に sample(1).jpg 〜 sample(57).jpg として 保存しています。
+商品画像のダミーデータは public/imagesフォルダ内に sample(1).jpg 〜 sample(57).jpg として 保存しています。
 
 php artisan storage:link で storageフォルダにリンク後、
 
 storage/app/public/productsフォルダ内に 保存すると表示されます。 (productsフォルダがない場合は作成してください。)
 上手く表示されない場合は、public/storageフォルダを一旦削除し、再度　php artisan storage:linkを実行してください。
 
-ショップの画像も表示する場合は、 storage/app/public/shopsフォルダを作成し 画像を保存してください。
+ショップの画像も表示する場合は、 storage/app/public/shopsフォルダを作成し 画像を保存してください。(sample60.jpg)
+
+スタッフの画像を表示する場合は、storage/app/public/membersフォルダを作成し 画像を保存してください。(sample70 ～ sample72.jpg)
 
 #
 ## 機能
