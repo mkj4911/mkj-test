@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
@@ -39,15 +41,27 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            DB::transaction(function () use ($request) {
 
-        event(new Registered($user));
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
 
-        Auth::login($user);
+                $profile = Profile::create([
+                    'user_id' => $user->id
+                ]);
+            }, 2);
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+
+        // event(new Registered($user));
+
+        // Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }

@@ -61,4 +61,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Member::class, 'sales')
             ->withPivot(['id', 'quantity', 'price']);
     }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }

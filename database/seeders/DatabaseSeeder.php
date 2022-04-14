@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             HolidaySeeder::class,
             UserSeeder::class,
+            ProfileSeeder::class,
         ]);
         //Product::factory(100)->create();
         Stock::factory(200)->create();

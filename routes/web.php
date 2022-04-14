@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ItemController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\HistoryController;
+use App\Http\Controllers\User\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,11 @@ Route::prefix('cart')->middleware('auth:users')->group(function () {
 
 Route::prefix('history')->middleware('auth:users')->group(function () {
     Route::get('/', [HistoryController::class, 'index'])->name('history.index');
+});
+
+Route::prefix('profiles')->middleware('auth:users')->group(function () {
+    Route::get('index', [ProfileController::class, 'index'])->name('profiles.index');
+    Route::post('update', [ProfileController::class, 'update'])->name('profiles.update');
 });
 
 require __DIR__ . '/auth.php';
