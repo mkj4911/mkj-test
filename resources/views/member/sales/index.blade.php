@@ -17,6 +17,7 @@
                             <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-xs md:text-sm bg-gray-100">単価</th>
                             <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-xs md:text-sm bg-gray-100">数量</th>
                             <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-xs md:text-sm bg-gray-100">販売日</th>
+                            <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-xs md:text-sm bg-gray-100">支払区分</th>
                             <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-xs md:text-sm bg-gray-100">処理区分</th>
                             <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-xs md:text-sm bg-gray-100"></th>
                             <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-xs md:text-sm bg-gray-100"></th>
@@ -29,6 +30,7 @@
                                 <td class="md:px-4 py-2 border-b-2 text-xs md:text-sm">{{ number_format($sale->price) }}<span class="text-xs md:text-sm text-gray-700">円</span></td>
                                 <td class="md:px-4 py-2 border-b-2 text-xs md:text-sm">{{ $sale->quantity }}個</td>
                                 <td class="md:px-4 py-2 border-b-2 text-xs md:text-sm">{{ date('Y-m-d', strtotime($sale->created_at)) }}</td>
+                                <td class="md:px-4 py-2 border-b-2 text-xs md:text-lg">{{ $sale->status }}</td>
                                 @if ($sale->processing === 0)
                                 <td class="md:px-4 py-2 border-b-2 text-xs md:text-sm font-semibold text-indigo-700">処理済</td>
                                 @else    

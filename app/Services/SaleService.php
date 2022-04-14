@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Sale;
+use App\Models\Stock;
 use DateTime;
 
 class SaleService
@@ -27,11 +28,14 @@ class SaleService
             $quantity = Cart::where('product_id', $sale->product_id)
                 ->select('product_id', 'user_id', 'quantity')->get()->toArray();
 
+            $status = Stock::where('product_id', $sale->product_id)
+                ->select('status')->get()->toArray();
+
             $processing = array('processing' => 1);
 
             $created_at = array('created_at' => new DateTime());
 
-            $result = array_merge($member[0], $product[0], $quantity[0], $processing, $created_at);
+            $result = array_merge($member[0], $product[0], $quantity[0], $status[1], $processing, $created_at);
 
             array_push($productsSale, $result);
         }

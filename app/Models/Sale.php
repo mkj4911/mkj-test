@@ -17,6 +17,7 @@ class Sale extends Model
         'product_id',
         'quantity',
         'price',
+        'status',
         'processing',
     ];
 
@@ -40,6 +41,7 @@ class Sale extends Model
                 'sales.quantity as quantity',
                 'sales.created_at as created_at',
                 'image1.filename as filename',
+                'sales.status',
                 'sales.processing'
             )
             ->orderBy('sales.created_at', 'desc');
