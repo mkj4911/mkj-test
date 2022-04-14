@@ -63,7 +63,7 @@ class CartController extends Controller
         return redirect()->route('user.cart.index');
     }
 
-    public function checkout()
+    public function checkoutCash()
     {
 
         $user = User::findOrFail(Auth::id());
@@ -93,6 +93,67 @@ class CartController extends Controller
                 'product_id' => $product->id,
                 'type' => \Constant::PRODUCT_LIST['sales'],
                 'quantity' => $product->pivot->quantity * -1,
+                'status' => 'cash',
+            ]);
+        }
+        // dd('test');
+
+        try {
+            DB::transaction(function () {
+                $sales = Cart::where('user_id', Auth::id())->get();
+                $productsSale = SaleService::getItemsSale($sales);
+
+                $items = Cart::where('user_id', Auth::id())->get();
+                $products = CartService::getItemsInCart($items);
+                $user = User::findOrFail(Auth::id());
+
+                SendThanksMail::dispatch($products, $user);
+                foreach ($products as $product) {
+                    SendOrderedMail::dispatch($product, $user);
+                }
+            }, 2);
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+
+
+        Cart::where('user_id', Auth::id())->delete();
+
+        return redirect()->route('user.items.index');
+    }
+
+    public function checkoutCard()
+    {
+
+        $user = User::findOrFail(Auth::id());
+        $products = $user->products;
+
+        $lineItems = [];
+        foreach ($products as $product) {
+            $quantity = '';
+            $quantity = Stock::where('product_id', $product->id)->sum('quantity');
+
+            if ($product->pivot->quantity > $quantity) {
+                return view('user.cart.index');
+            } else {
+                $lineItem = [
+                    'name' => $product->name,
+                    'description' => $product->information,
+                    'amount' => $product->price,
+                    'currency' => 'jpy',
+                    'quantity' => $product->pivot->quantity,
+                ];
+                array_push($lineItems, $lineItem);
+            }
+        }
+        // dd($lineItems);
+        foreach ($products as $product) {
+            Stock::create([
+                'product_id' => $product->id,
+                'type' => \Constant::PRODUCT_LIST['sales'],
+                'quantity' => $product->pivot->quantity * -1,
+                'status' => 'card',
             ]);
         }
         // dd('test');

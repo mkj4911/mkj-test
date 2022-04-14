@@ -30,6 +30,7 @@ class CreateSalesTable extends Migration
                 ->onDelete('cascade');
             $table->unsignedInteger('price');
             $table->integer('quantity');
+            $table->string('status')->nullable();
             $table->boolean('processing')->nullable();
             $table->timestamps();
         });

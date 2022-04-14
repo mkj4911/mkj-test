@@ -42,7 +42,8 @@
                             合計金額: <span class="text-2xl">{{ number_format($totalPrice)}}</span><span class="text-sm text-gray-700">円(税込)</span>
                         </div>
                         <div>
-                            <button class="text-white bg-gray-500 h-8 w-36 mx-8 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg" onclick="location.href='{{ route('user.cart.checkout')}}'">購入する</button>
+                            <button class="text-white bg-gray-500 h-8 w-36 mx-8 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg" onclick="location.href='{{ route('user.cart.checkout.cash')}}'">購入するcash</button>
+                            <button class="text-white bg-gray-500 h-8 w-36 mx-8 ring-8 ring-gray-600 rounded-full hover:bg-gray-400 text-lg" onclick="location.href='{{ route('user.cart.checkout.card')}}'">購入するcard</button>
                         </div>
                       </div>
                     @else
