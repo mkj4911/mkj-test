@@ -18,8 +18,8 @@ class AdminSeeder extends Seeder
         DB::table('admins')->insert([
             'name' => 'mkj',
             'email' => 'mkj@test.com',
-            'password' => Hash::make('password123'),
-            'created_at' => '2021/01/01 11:11:11',
+            'password' => Hash::make('yunikonn'),
+            'created_at' => '2022/01/01 11:11:11',
         ]);
     }
 }

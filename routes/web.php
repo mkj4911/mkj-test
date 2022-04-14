@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MkjController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ItemController;
 use App\Http\Controllers\User\CartController;
@@ -17,15 +18,18 @@ use App\Http\Controllers\User\HistoryController;
 */
 
 // Route::get('/', function () {
-//     return view('user.welcome');
+//     return view('/mkj/welcome');
 // });
+
+Route::get('/', [MkjController::class, 'index'])->name('mkj.index');
+Route::get('mkj/show/{item}', [MkjController::class, 'show'])->name('mkj.show');
 
 // Route::get('/dashboard', function () {
 //     return view('user.dashboard');
 // })->middleware(['auth:users'])->name('dashboard');
 
 Route::middleware('auth:users')->group(function () {
-    Route::get('/', [ItemController::class, 'index'])->name('items.index');
+    Route::get('item', [ItemController::class, 'index'])->name('items.index');
     Route::get('shop', [ItemController::class, 'shop'])->name('items.shop');
     Route::get('show/{item}', [ItemController::class, 'show'])->name('items.show');
 });

@@ -19,20 +19,20 @@ class UserSeeder extends Seeder
             [
                 'name' => 'user1',
                 'email' => 'user1@test.com',
-                'password' => Hash::make('password123'),
-                'created_at' => '2021/01/01 11:11:11',
+                'password' => Hash::make('yunikonn'),
+                'created_at' => '2022/01/01 11:11:11',
             ],
             [
                 'name' => 'user2',
                 'email' => 'user2@test.com',
-                'password' => Hash::make('password123'),
-                'created_at' => '2021/01/01 11:11:11',
+                'password' => Hash::make('yunikonn'),
+                'created_at' => '2022/01/01 11:11:11',
             ],
             [
                 'name' => 'user3',
                 'email' => 'user3@test.com',
-                'password' => Hash::make('password123'),
-                'created_at' => '2021/01/01 11:11:11',
+                'password' => Hash::make('yunikonn'),
+                'created_at' => '2022/01/01 11:11:11',
             ],
         ]);
     }
