@@ -29,8 +29,8 @@ use App\Http\Controllers\Admin\AttendanceController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('admin.welcome');
+// Route::get('/mkj/welcome', function () {
+//     return view('mkj.welcome');
 // });
 
 Route::get('/dashboard', function () {

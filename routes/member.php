@@ -26,8 +26,8 @@ use App\Http\Controllers\Member\SalesController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('member.welcome');
+// Route::get('/mkj/welcome', function () {
+//     return view('mkj.welcome');
 // });
 
 Route::get('/dashboard', function () {
