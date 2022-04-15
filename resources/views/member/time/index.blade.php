@@ -19,7 +19,10 @@
                     <img class="mx-auto w-40 h-40 mb-2 object-cover rounded-full"  src="{{ asset('images/no_face.jpg') }}">
                   @else
                     <img class="mx-auto w-60 h-40 mb-2 rounded-md" src="{{ asset('storage/members/' . $member->filename )}}">
-                  @endif 
+                  @endif
+                  
+                  <input type="hidden" name="old_image" value="{{ $member->filename }}">
+
                 <div class="p-2 w-2/3 mx-auto">
                       <div class="relative mb-2">
                         <label for="image" class="leading-7 text-sm text-gray-600">画像変更</label>

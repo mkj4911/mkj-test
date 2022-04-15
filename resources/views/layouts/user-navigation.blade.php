@@ -46,6 +46,9 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
+                        <x-dropdown-link href="{{route('user.profiles.index')}}">
+                            お客様情報
+                        </x-dropdown-link>
                         <form method="POST" action="{{ route('user.logout') }}">
                             @csrf
 
