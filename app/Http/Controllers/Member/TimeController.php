@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UploadImageRequest;
-use App\Services\ImageService;
+use App\Services\ImageService400;
 
 
 class TimeController extends Controller
@@ -176,13 +176,18 @@ class TimeController extends Controller
 
     public function update(UploadImageRequest $request)
     {
+        $old_image = $request->old_image;
+
         $imageFile = $request->image;
         if (!is_null($imageFile) && $imageFile->isValid()) {
-            $fileNameToStore = ImageService::upload($imageFile, 'members');
+            $fileNameToStore = ImageService400::upload($imageFile, 'members');
         }
 
         $member = Member::where('id', Auth::id())->first();
         if (!is_null($imageFile) && $imageFile->isValid()) {
+            if ($old_image) {
+                unlink('storage/members/' . $old_image);
+            }
             $member->filename = $fileNameToStore;
         }
 
