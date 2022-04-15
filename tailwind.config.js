@@ -5,9 +5,10 @@ module.exports = {
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
+    './node_modules/flowbite/**/*/.js'
   ],
   presets: [],
-  darkMode: 'media', // or 'class'
+  darkMode: 'class', // or 'class'
   theme: {
     extend: {
       fontFamily: {
@@ -957,5 +958,8 @@ module.exports = {
     'active',
     'disabled',
   ],
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('flowbite/plugin')
+  ],
 }
