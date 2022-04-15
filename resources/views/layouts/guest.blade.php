@@ -20,5 +20,6 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        <script src="../path/to/flowbite/dist/flowbite.js"></script>
     </body>
 </html>
