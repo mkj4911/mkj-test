@@ -19,6 +19,8 @@ class Sale extends Model
         'price',
         'status',
         'processing',
+        'rating',
+        'comment'
     ];
 
     public function scopeSalesHistory($query)
@@ -42,7 +44,8 @@ class Sale extends Model
                 'sales.created_at as created_at',
                 'image1.filename as filename',
                 'sales.status',
-                'sales.processing'
+                'sales.processing',
+                'sales.rating'
             )
             ->orderBy('sales.created_at', 'desc');
     }

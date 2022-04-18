@@ -27,8 +27,10 @@
                             <div class="md:w-2/12 pt-8"><span class="text-xs text-gray-700">購入日：</span>{{ date('Y-m-d', strtotime($history->created_at)) }}</div>
                         </div>
                         <div class="flex justify-end border-b my-2">
-                          <p class="mb-4"><a class="border rounded-full px-4 ml-4 hover:bg-gray-200" href="{{ route('user.items.show', ['item' => $history->product_id])}}">商品詳細を見る</a></p>
-                          <p class="mb-4"><a class="border rounded-full px-4 ml-4 hover:bg-gray-200" href="{{ route('user.history.edit', ['sale_id' => $history->id]) }}">Reviewを書く</a></p>
+                          @if($history->rating === null)
+                          <p class="mb-4"><a class="border rounded-full ring-4 ring-gray-300 px-4 ml-4 hover:bg-gray-200" href="{{ route('user.history.edit', ['sale_id' => $history->id]) }}">レビューを書く</a></p>
+                          @endif
+                          <p class="mb-4"><a class="border rounded-full ring-4 ring-gray-300 px-4 ml-4 hover:bg-gray-200" href="{{ route('user.items.show', ['item' => $history->product_id])}}">商品詳細を見る</a></p>
                         </div>
                         @endforeach
                     @else
