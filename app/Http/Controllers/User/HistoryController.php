@@ -20,7 +20,14 @@ class HistoryController extends Controller
         $user = User::findOrFail(Auth::id());
         $historys = Sale::SalesHistory()
             ->where('sales.user_id', Auth::id())->get();
-
+        // dd($historys);
         return view('user.history', compact('historys'));
+    }
+
+    public function edit($id)
+    {
+        $review = Sale::findOrFail($id);
+
+        return view('user.history-edit', compact('review'));
     }
 }

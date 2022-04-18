@@ -32,6 +32,8 @@ class CreateSalesTable extends Migration
             $table->integer('quantity');
             $table->string('status')->nullable();
             $table->boolean('processing')->nullable();
+            $table->integer('rating')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

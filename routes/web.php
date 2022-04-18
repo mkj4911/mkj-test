@@ -47,7 +47,11 @@ Route::prefix('cart')->middleware('auth:users')->group(function () {
 
 Route::prefix('history')->middleware('auth:users')->group(function () {
     Route::get('/', [HistoryController::class, 'index'])->name('history.index');
+    Route::get('/edit/{sale_id}', [HistoryController::class, 'edit'])->name('history.edit');
+    Route::post('/update/{sale_id}', [HistoryController::class, 'update'])->name('history.update');
 });
+
+
 
 Route::prefix('profiles')->middleware('auth:users')->group(function () {
     Route::get('index', [ProfileController::class, 'index'])->name('profiles.index');
